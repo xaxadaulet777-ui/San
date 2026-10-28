@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Санды табу ойыны</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            text-align: center;
+            padding-top: 50px;
+        }
+        .game-box {
+            background: white;
+            color: #333;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            width: 60%;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #0984e3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0652dd;
+        }
+        #message {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-box">
+        <h1>🎲 Санды тап!</h1>
+        <p>Компьютер 1 мен 100 арасында бір сан ойлады. Соны табуға тырысыңыз!</p>
+        <input type="number" id="userGuess" placeholder="Санды енгізіңіз">
+        <br>
+        <button onclick="checkGuess()">Тексеру</button>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        let randomNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        function checkGuess() {
+            let userGuess = Number(document.getElementById('userGuess').value);
+            let message = document.getElementById('message');
+            attempts++;
+
+            if (!userGuess) {
+                message.style.color = "red";
+                message.innerHTML = "Өтінемін, сан енгізіңіз!";
+                return;
+            }
+
+            if (userGuess === randomNumber) {
+                message.style.color = "green";
+                message.innerHTML = `🎉 Құттықтаймын! Сіз санды ${attempts} әрекетте таптыңыз!`;
+            } else if (userGuess < randomNumber) {
+                message.style.color = "orange";
+                message.innerHTML = "📈 Жоғарырақ (көбірек сан жазыңыз)";
+            } else {
+                message.style.color = "blue";
+                message.innerHTML = "📉 Төменрек (азырақ сан жазыңыз)";
+            }
+        }
+    </script>
+
+</body>
+</html>
+
